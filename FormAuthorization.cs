@@ -34,6 +34,12 @@ namespace Project
             {
                 MessageBox.Show("Такого пользователя нет");
             }
+            else
+            {
+                FormMain newForm = new FormMain();
+                newForm.Show();
+                this.Hide();
+            }
         }
        
     }
