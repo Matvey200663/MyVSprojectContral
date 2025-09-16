@@ -1,6 +1,6 @@
 ﻿namespace Project
 {
-    partial class Form1
+    partial class FormRegister
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -79,7 +79,7 @@
             this.textBox1.Location = new System.Drawing.Point(17, 73);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(159, 20);
-            this.textBox1.TabIndex = 2;
+            this.textBox1.TabIndex = 0;
             this.textBox1.Text = "Иванов";
             this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
             // 
@@ -100,7 +100,7 @@
             this.textBox2.Location = new System.Drawing.Point(17, 123);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(159, 20);
-            this.textBox2.TabIndex = 2;
+            this.textBox2.TabIndex = 1;
             // 
             // label4
             // 
@@ -138,7 +138,7 @@
             this.textBox4.Location = new System.Drawing.Point(17, 222);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(159, 20);
-            this.textBox4.TabIndex = 2;
+            this.textBox4.TabIndex = 3;
             // 
             // label6
             // 
@@ -157,7 +157,7 @@
             this.textBox5.Location = new System.Drawing.Point(17, 277);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(159, 20);
-            this.textBox5.TabIndex = 2;
+            this.textBox5.TabIndex = 4;
             // 
             // label7
             // 
@@ -186,7 +186,7 @@
             this.textBox6.Location = new System.Drawing.Point(17, 363);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(159, 20);
-            this.textBox6.TabIndex = 2;
+            this.textBox6.TabIndex = 5;
             // 
             // label9
             // 
@@ -218,7 +218,7 @@
             this.comboBox1.Location = new System.Drawing.Point(17, 460);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(300, 21);
-            this.comboBox1.TabIndex = 4;
+            this.comboBox1.TabIndex = 6;
             // 
             // label11
             // 
@@ -237,7 +237,7 @@
             this.textBox7.Location = new System.Drawing.Point(17, 508);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(159, 20);
-            this.textBox7.TabIndex = 2;
+            this.textBox7.TabIndex = 7;
             // 
             // checkBox1
             // 
@@ -245,7 +245,7 @@
             this.checkBox1.Location = new System.Drawing.Point(13, 535);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(141, 17);
-            this.checkBox1.TabIndex = 5;
+            this.checkBox1.TabIndex = 8;
             this.checkBox1.Text = "Согласен с условиями";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
@@ -255,12 +255,12 @@
             this.button1.Location = new System.Drawing.Point(10, 558);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(166, 23);
-            this.button1.TabIndex = 6;
+            this.button1.TabIndex = 9;
             this.button1.Text = "Далее";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // FormRegister
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -288,8 +288,8 @@
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form1";
-            this.Text = "Авторизация";
+            this.Name = "FormRegister";
+            this.Text = "Регистрация";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

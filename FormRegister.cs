@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace Project
 {
-    public partial class Form1 : Form
+    public partial class FormRegister : Form
     {
         ИСПП6_Вар6_Агапов_АндреевEntities1 qwest;
 
-        public Form1()
+        public FormRegister()
         {
             InitializeComponent();
             qwest = new ИСПП6_Вар6_Агапов_АндреевEntities1();
@@ -79,6 +79,7 @@ namespace Project
 
                 qwest.Пользователь.Add(newUser);
                 qwest.SaveChanges();
+
 
                 MessageBox.Show($"Пользователь {textBox1.Text} {textBox2.Text} добавлен!");
 

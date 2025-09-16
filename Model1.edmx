@@ -4,7 +4,66 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище ИСПП6_Вар6_Агапов_АндреевModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище ИСПП6_Вар6_Агапов_АндреевModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Договоры">
+          <Key>
+            <PropertyRef Name="КодДоговора" />
+          </Key>
+          <Property Name="КодДоговора" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="НомерДоговора" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="КодТендера" Type="int" />
+          <Property Name="КодПоставщика" Type="int" Nullable="false" />
+          <Property Name="ДатаНачала" Type="date" Nullable="false" />
+          <Property Name="ДатаОкончания" Type="date" Nullable="false" />
+          <Property Name="ОбщаяСумма" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="Статус" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ЗадачиПроекта">
+          <Key>
+            <PropertyRef Name="КодЗадачи" />
+          </Key>
+          <Property Name="КодЗадачи" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="КодПроекта" Type="int" Nullable="false" />
+          <Property Name="НазваниеЗадачи" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Исполнитель" Type="int" Nullable="false" />
+          <Property Name="ДатаНачала" Type="date" Nullable="false" />
+          <Property Name="СрокВыполнения" Type="date" Nullable="false" />
+          <Property Name="Статус" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ЗатратыПроекта">
+          <Key>
+            <PropertyRef Name="КодЗатраты" />
+          </Key>
+          <Property Name="КодЗатраты" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="КодПроекта" Type="int" Nullable="false" />
+          <Property Name="Дата" Type="date" Nullable="false" />
+          <Property Name="Описание" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Сумма" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Категория" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ИспользованиеНедвижимости">
+          <Key>
+            <PropertyRef Name="КодИспользования" />
+          </Key>
+          <Property Name="КодИспользования" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="КодОбъекта" Type="int" Nullable="false" />
+          <Property Name="КодПроекта" Type="int" />
+          <Property Name="ДатаНачала" Type="date" Nullable="false" />
+          <Property Name="ДатаОкончания" Type="date" />
+          <Property Name="Назначение" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ОбъектыНедвижимости">
+          <Key>
+            <PropertyRef Name="КодОбъекта" />
+          </Key>
+          <Property Name="КодОбъекта" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Адрес" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="ТипНедвижимости" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Площадь" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Ответственный" Type="int" Nullable="false" />
+          <Property Name="Статус" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Пользователь">
           <Key>
             <PropertyRef Name="КодПользователя" />
@@ -18,6 +77,51 @@
           <Property Name="ОтветНаСекретныйВопрос" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="КодСекретныйВопрос" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Поставщики">
+          <Key>
+            <PropertyRef Name="КодПоставщика" />
+          </Key>
+          <Property Name="КодПоставщика" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="КонтактноеЛицо" Type="nvarchar" MaxLength="100" />
+          <Property Name="Телефон" Type="nvarchar" MaxLength="20" />
+          <Property Name="Рейтинг" Type="int" />
+        </EntityType>
+        <EntityType Name="Проекты">
+          <Key>
+            <PropertyRef Name="КодПроекта" />
+          </Key>
+          <Property Name="КодПроекта" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="НазваниеПроекта" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Описание" Type="nvarchar" MaxLength="500" />
+          <Property Name="ДатаНачала" Type="date" Nullable="false" />
+          <Property Name="ДатаЗавершения" Type="date" />
+          <Property Name="Бюджет" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="РуководительПроекта" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="РасчетЗарплаты">
+          <Key>
+            <PropertyRef Name="КодРасчета" />
+          </Key>
+          <Property Name="КодРасчета" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="КодСотрудника" Type="int" Nullable="false" />
+          <Property Name="Период" Type="date" Nullable="false" />
+          <Property Name="Оклад" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Премия" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Удержания" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="ИтогоНачислено" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="РесурсыПроекта">
+          <Key>
+            <PropertyRef Name="КодРесурса" />
+          </Key>
+          <Property Name="КодРесурса" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="КодПроекта" Type="int" Nullable="false" />
+          <Property Name="НаименованиеРесурса" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ТипРесурса" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Количество" Type="int" Nullable="false" />
+          <Property Name="Стоимость" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="СекретныйВопрос">
           <Key>
             <PropertyRef Name="КодСекретныйВопрос" />
@@ -25,6 +129,242 @@
           <Property Name="КодСекретныйВопрос" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="СекретныйВопрос" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="Сотрудники">
+          <Key>
+            <PropertyRef Name="КодСотрудника" />
+          </Key>
+          <Property Name="КодСотрудника" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="КодПользователя" Type="int" Nullable="false" />
+          <Property Name="Фамилия" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Отчество" Type="nvarchar" MaxLength="50" />
+          <Property Name="Должность" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ДатаПриема" Type="date" Nullable="false" />
+          <Property Name="Оклад" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Тендеры">
+          <Key>
+            <PropertyRef Name="КодТендера" />
+          </Key>
+          <Property Name="КодТендера" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="НазваниеТендера" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Ответственный" Type="int" Nullable="false" />
+          <Property Name="ДатаНачала" Type="date" Nullable="false" />
+          <Property Name="ДатаЗавершения" Type="date" Nullable="false" />
+          <Property Name="Бюджет" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="Статус" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="УчастникиТендера">
+          <Key>
+            <PropertyRef Name="КодУчастия" />
+          </Key>
+          <Property Name="КодУчастия" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="КодТендера" Type="int" Nullable="false" />
+          <Property Name="КодПоставщика" Type="int" Nullable="false" />
+          <Property Name="ПредложеннаяСумма" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="Статус" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="УчетРабочегоВремени">
+          <Key>
+            <PropertyRef Name="КодУчета" />
+          </Key>
+          <Property Name="КодУчета" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="КодСотрудника" Type="int" Nullable="false" />
+          <Property Name="Дата" Type="date" Nullable="false" />
+          <Property Name="ОтработанныеЧасы" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Договоры__КодПос__797309D9">
+          <End Role="Поставщики" Type="Self.Поставщики" Multiplicity="1" />
+          <End Role="Договоры" Type="Self.Договоры" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поставщики">
+              <PropertyRef Name="КодПоставщика" />
+            </Principal>
+            <Dependent Role="Договоры">
+              <PropertyRef Name="КодПоставщика" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Договоры__КодТен__787EE5A0">
+          <End Role="Тендеры" Type="Self.Тендеры" Multiplicity="0..1" />
+          <End Role="Договоры" Type="Self.Договоры" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тендеры">
+              <PropertyRef Name="КодТендера" />
+            </Principal>
+            <Dependent Role="Договоры">
+              <PropertyRef Name="КодТендера" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ЗадачиПро__Испол__628FA481">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="ЗадачиПроекта" Type="Self.ЗадачиПроекта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="ЗадачиПроекта">
+              <PropertyRef Name="Исполнитель" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ЗадачиПро__КодПр__619B8048">
+          <End Role="Проекты" Type="Self.Проекты" Multiplicity="1" />
+          <End Role="ЗадачиПроекта" Type="Self.ЗадачиПроекта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Проекты">
+              <PropertyRef Name="КодПроекта" />
+            </Principal>
+            <Dependent Role="ЗадачиПроекта">
+              <PropertyRef Name="КодПроекта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ЗатратыПр__КодПр__68487DD7">
+          <End Role="Проекты" Type="Self.Проекты" Multiplicity="1" />
+          <End Role="ЗатратыПроекта" Type="Self.ЗатратыПроекта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Проекты">
+              <PropertyRef Name="КодПроекта" />
+            </Principal>
+            <Dependent Role="ЗатратыПроекта">
+              <PropertyRef Name="КодПроекта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Использов__КодОб__00200768">
+          <End Role="ОбъектыНедвижимости" Type="Self.ОбъектыНедвижимости" Multiplicity="1" />
+          <End Role="ИспользованиеНедвижимости" Type="Self.ИспользованиеНедвижимости" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ОбъектыНедвижимости">
+              <PropertyRef Name="КодОбъекта" />
+            </Principal>
+            <Dependent Role="ИспользованиеНедвижимости">
+              <PropertyRef Name="КодОбъекта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Использов__КодПр__01142BA1">
+          <End Role="Проекты" Type="Self.Проекты" Multiplicity="0..1" />
+          <End Role="ИспользованиеНедвижимости" Type="Self.ИспользованиеНедвижимости" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Проекты">
+              <PropertyRef Name="КодПроекта" />
+            </Principal>
+            <Dependent Role="ИспользованиеНедвижимости">
+              <PropertyRef Name="КодПроекта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ОбъектыНе__Ответ__7D439ABD">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="ОбъектыНедвижимости" Type="Self.ОбъектыНедвижимости" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="ОбъектыНедвижимости">
+              <PropertyRef Name="Ответственный" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Проекты__Руковод__5DCAEF64">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="Проекты" Type="Self.Проекты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="Проекты">
+              <PropertyRef Name="РуководительПроекта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__РасчетЗар__КодСо__5AEE82B9">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="РасчетЗарплаты" Type="Self.РасчетЗарплаты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="РасчетЗарплаты">
+              <PropertyRef Name="КодСотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__РесурсыПр__КодПр__656C112C">
+          <End Role="Проекты" Type="Self.Проекты" Multiplicity="1" />
+          <End Role="РесурсыПроекта" Type="Self.РесурсыПроекта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Проекты">
+              <PropertyRef Name="КодПроекта" />
+            </Principal>
+            <Dependent Role="РесурсыПроекта">
+              <PropertyRef Name="КодПроекта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Сотрудник__КодПо__534D60F1">
+          <End Role="Пользователь" Type="Self.Пользователь" Multiplicity="1" />
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователь">
+              <PropertyRef Name="КодПользователя" />
+            </Principal>
+            <Dependent Role="Сотрудники">
+              <PropertyRef Name="КодПользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Тендеры__Ответст__6EF57B66">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="Тендеры" Type="Self.Тендеры" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="Тендеры">
+              <PropertyRef Name="Ответственный" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Участники__КодПо__73BA3083">
+          <End Role="Поставщики" Type="Self.Поставщики" Multiplicity="1" />
+          <End Role="УчастникиТендера" Type="Self.УчастникиТендера" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поставщики">
+              <PropertyRef Name="КодПоставщика" />
+            </Principal>
+            <Dependent Role="УчастникиТендера">
+              <PropertyRef Name="КодПоставщика" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Участники__КодТе__72C60C4A">
+          <End Role="Тендеры" Type="Self.Тендеры" Multiplicity="1" />
+          <End Role="УчастникиТендера" Type="Self.УчастникиТендера" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тендеры">
+              <PropertyRef Name="КодТендера" />
+            </Principal>
+            <Dependent Role="УчастникиТендера">
+              <PropertyRef Name="КодТендера" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__УчетРабоч__КодСо__5629CD9C">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="УчетРабочегоВремени" Type="Self.УчетРабочегоВремени" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="УчетРабочегоВремени">
+              <PropertyRef Name="КодСотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Пользователь_СекретныйВопрос">
           <End Role="СекретныйВопрос" Type="Self.СекретныйВопрос" Multiplicity="1" />
           <End Role="Пользователь" Type="Self.Пользователь" Multiplicity="*" />
@@ -38,15 +378,91 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище ИСПП6_Вар6_Агапов_АндреевModelContainer">
+          <EntitySet Name="Договоры" EntityType="Self.Договоры" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗадачиПроекта" EntityType="Self.ЗадачиПроекта" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗатратыПроекта" EntityType="Self.ЗатратыПроекта" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ИспользованиеНедвижимости" EntityType="Self.ИспользованиеНедвижимости" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ОбъектыНедвижимости" EntityType="Self.ОбъектыНедвижимости" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Пользователь" EntityType="Self.Пользователь" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Поставщики" EntityType="Self.Поставщики" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Проекты" EntityType="Self.Проекты" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="РасчетЗарплаты" EntityType="Self.РасчетЗарплаты" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="РесурсыПроекта" EntityType="Self.РесурсыПроекта" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="СекретныйВопрос" EntityType="Self.СекретныйВопрос" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сотрудники" EntityType="Self.Сотрудники" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Тендеры" EntityType="Self.Тендеры" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="УчастникиТендера" EntityType="Self.УчастникиТендера" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="УчетРабочегоВремени" EntityType="Self.УчетРабочегоВремени" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Договоры__КодПос__797309D9" Association="Self.FK__Договоры__КодПос__797309D9">
+            <End Role="Поставщики" EntitySet="Поставщики" />
+            <End Role="Договоры" EntitySet="Договоры" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Договоры__КодТен__787EE5A0" Association="Self.FK__Договоры__КодТен__787EE5A0">
+            <End Role="Тендеры" EntitySet="Тендеры" />
+            <End Role="Договоры" EntitySet="Договоры" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ЗадачиПро__Испол__628FA481" Association="Self.FK__ЗадачиПро__Испол__628FA481">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="ЗадачиПроекта" EntitySet="ЗадачиПроекта" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ЗадачиПро__КодПр__619B8048" Association="Self.FK__ЗадачиПро__КодПр__619B8048">
+            <End Role="Проекты" EntitySet="Проекты" />
+            <End Role="ЗадачиПроекта" EntitySet="ЗадачиПроекта" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ЗатратыПр__КодПр__68487DD7" Association="Self.FK__ЗатратыПр__КодПр__68487DD7">
+            <End Role="Проекты" EntitySet="Проекты" />
+            <End Role="ЗатратыПроекта" EntitySet="ЗатратыПроекта" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Использов__КодОб__00200768" Association="Self.FK__Использов__КодОб__00200768">
+            <End Role="ОбъектыНедвижимости" EntitySet="ОбъектыНедвижимости" />
+            <End Role="ИспользованиеНедвижимости" EntitySet="ИспользованиеНедвижимости" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Использов__КодПр__01142BA1" Association="Self.FK__Использов__КодПр__01142BA1">
+            <End Role="Проекты" EntitySet="Проекты" />
+            <End Role="ИспользованиеНедвижимости" EntitySet="ИспользованиеНедвижимости" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ОбъектыНе__Ответ__7D439ABD" Association="Self.FK__ОбъектыНе__Ответ__7D439ABD">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="ОбъектыНедвижимости" EntitySet="ОбъектыНедвижимости" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Проекты__Руковод__5DCAEF64" Association="Self.FK__Проекты__Руковод__5DCAEF64">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Проекты" EntitySet="Проекты" />
+          </AssociationSet>
+          <AssociationSet Name="FK__РасчетЗар__КодСо__5AEE82B9" Association="Self.FK__РасчетЗар__КодСо__5AEE82B9">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="РасчетЗарплаты" EntitySet="РасчетЗарплаты" />
+          </AssociationSet>
+          <AssociationSet Name="FK__РесурсыПр__КодПр__656C112C" Association="Self.FK__РесурсыПр__КодПр__656C112C">
+            <End Role="Проекты" EntitySet="Проекты" />
+            <End Role="РесурсыПроекта" EntitySet="РесурсыПроекта" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Сотрудник__КодПо__534D60F1" Association="Self.FK__Сотрудник__КодПо__534D60F1">
+            <End Role="Пользователь" EntitySet="Пользователь" />
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Тендеры__Ответст__6EF57B66" Association="Self.FK__Тендеры__Ответст__6EF57B66">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Тендеры" EntitySet="Тендеры" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Участники__КодПо__73BA3083" Association="Self.FK__Участники__КодПо__73BA3083">
+            <End Role="Поставщики" EntitySet="Поставщики" />
+            <End Role="УчастникиТендера" EntitySet="УчастникиТендера" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Участники__КодТе__72C60C4A" Association="Self.FK__Участники__КодТе__72C60C4A">
+            <End Role="Тендеры" EntitySet="Тендеры" />
+            <End Role="УчастникиТендера" EntitySet="УчастникиТендера" />
+          </AssociationSet>
+          <AssociationSet Name="FK__УчетРабоч__КодСо__5629CD9C" Association="Self.FK__УчетРабоч__КодСо__5629CD9C">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="УчетРабочегоВремени" EntitySet="УчетРабочегоВремени" />
+          </AssociationSet>
           <AssociationSet Name="FK_Пользователь_СекретныйВопрос" Association="Self.FK_Пользователь_СекретныйВопрос">
             <End Role="СекретныйВопрос" EntitySet="СекретныйВопрос" />
             <End Role="Пользователь" EntitySet="Пользователь" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ИСПП6_Вар6_Агапов_АндреевModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -63,6 +479,7 @@
           <Property Name="ОтветНаСекретныйВопрос" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="КодСекретныйВопрос" Type="Int32" Nullable="false" />
           <NavigationProperty Name="СекретныйВопрос" Relationship="Self.FK_Пользователь_СекретныйВопрос" FromRole="Пользователь" ToRole="СекретныйВопрос" />
+          <NavigationProperty Name="Сотрудники" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Сотрудник__КодПо__534D60F1" FromRole="Пользователь" ToRole="Сотрудники" />
         </EntityType>
         <EntityType Name="СекретныйВопрос">
           <Key>
@@ -91,7 +508,455 @@
             <End Role="СекретныйВопрос" EntitySet="СекретныйВопрос" />
             <End Role="Пользователь" EntitySet="Пользователь" />
           </AssociationSet>
+          <EntitySet Name="Договоры" EntityType="ИСПП6_Вар6_Агапов_АндреевModel.Договоры" />
+          <EntitySet Name="ЗадачиПроекта" EntityType="ИСПП6_Вар6_Агапов_АндреевModel.ЗадачиПроекта" />
+          <EntitySet Name="ЗатратыПроекта" EntityType="ИСПП6_Вар6_Агапов_АндреевModel.ЗатратыПроекта" />
+          <EntitySet Name="ИспользованиеНедвижимости" EntityType="ИСПП6_Вар6_Агапов_АндреевModel.ИспользованиеНедвижимости" />
+          <EntitySet Name="ОбъектыНедвижимости" EntityType="ИСПП6_Вар6_Агапов_АндреевModel.ОбъектыНедвижимости" />
+          <EntitySet Name="Поставщики" EntityType="ИСПП6_Вар6_Агапов_АндреевModel.Поставщики" />
+          <EntitySet Name="Проекты" EntityType="ИСПП6_Вар6_Агапов_АндреевModel.Проекты" />
+          <EntitySet Name="РасчетЗарплаты" EntityType="ИСПП6_Вар6_Агапов_АндреевModel.РасчетЗарплаты" />
+          <EntitySet Name="РесурсыПроекта" EntityType="ИСПП6_Вар6_Агапов_АндреевModel.РесурсыПроекта" />
+          <EntitySet Name="Сотрудники" EntityType="ИСПП6_Вар6_Агапов_АндреевModel.Сотрудники" />
+          <EntitySet Name="Тендеры" EntityType="ИСПП6_Вар6_Агапов_АндреевModel.Тендеры" />
+          <EntitySet Name="УчастникиТендера" EntityType="ИСПП6_Вар6_Агапов_АндреевModel.УчастникиТендера" />
+          <EntitySet Name="УчетРабочегоВремени" EntityType="ИСПП6_Вар6_Агапов_АндреевModel.УчетРабочегоВремени" />
+          <AssociationSet Name="FK__Договоры__КодПос__797309D9" Association="ИСПП6_Вар6_Агапов_АндреевModel.FK__Договоры__КодПос__797309D9">
+            <End Role="Поставщики" EntitySet="Поставщики" />
+            <End Role="Договоры" EntitySet="Договоры" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Договоры__КодТен__787EE5A0" Association="ИСПП6_Вар6_Агапов_АндреевModel.FK__Договоры__КодТен__787EE5A0">
+            <End Role="Тендеры" EntitySet="Тендеры" />
+            <End Role="Договоры" EntitySet="Договоры" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ЗадачиПро__Испол__628FA481" Association="ИСПП6_Вар6_Агапов_АндреевModel.FK__ЗадачиПро__Испол__628FA481">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="ЗадачиПроекта" EntitySet="ЗадачиПроекта" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ЗадачиПро__КодПр__619B8048" Association="ИСПП6_Вар6_Агапов_АндреевModel.FK__ЗадачиПро__КодПр__619B8048">
+            <End Role="Проекты" EntitySet="Проекты" />
+            <End Role="ЗадачиПроекта" EntitySet="ЗадачиПроекта" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ЗатратыПр__КодПр__68487DD7" Association="ИСПП6_Вар6_Агапов_АндреевModel.FK__ЗатратыПр__КодПр__68487DD7">
+            <End Role="Проекты" EntitySet="Проекты" />
+            <End Role="ЗатратыПроекта" EntitySet="ЗатратыПроекта" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Использов__КодОб__00200768" Association="ИСПП6_Вар6_Агапов_АндреевModel.FK__Использов__КодОб__00200768">
+            <End Role="ОбъектыНедвижимости" EntitySet="ОбъектыНедвижимости" />
+            <End Role="ИспользованиеНедвижимости" EntitySet="ИспользованиеНедвижимости" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Использов__КодПр__01142BA1" Association="ИСПП6_Вар6_Агапов_АндреевModel.FK__Использов__КодПр__01142BA1">
+            <End Role="Проекты" EntitySet="Проекты" />
+            <End Role="ИспользованиеНедвижимости" EntitySet="ИспользованиеНедвижимости" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ОбъектыНе__Ответ__7D439ABD" Association="ИСПП6_Вар6_Агапов_АндреевModel.FK__ОбъектыНе__Ответ__7D439ABD">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="ОбъектыНедвижимости" EntitySet="ОбъектыНедвижимости" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Сотрудник__КодПо__534D60F1" Association="ИСПП6_Вар6_Агапов_АндреевModel.FK__Сотрудник__КодПо__534D60F1">
+            <End Role="Пользователь" EntitySet="Пользователь" />
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Участники__КодПо__73BA3083" Association="ИСПП6_Вар6_Агапов_АндреевModel.FK__Участники__КодПо__73BA3083">
+            <End Role="Поставщики" EntitySet="Поставщики" />
+            <End Role="УчастникиТендера" EntitySet="УчастникиТендера" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Проекты__Руковод__5DCAEF64" Association="ИСПП6_Вар6_Агапов_АндреевModel.FK__Проекты__Руковод__5DCAEF64">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Проекты" EntitySet="Проекты" />
+          </AssociationSet>
+          <AssociationSet Name="FK__РесурсыПр__КодПр__656C112C" Association="ИСПП6_Вар6_Агапов_АндреевModel.FK__РесурсыПр__КодПр__656C112C">
+            <End Role="Проекты" EntitySet="Проекты" />
+            <End Role="РесурсыПроекта" EntitySet="РесурсыПроекта" />
+          </AssociationSet>
+          <AssociationSet Name="FK__РасчетЗар__КодСо__5AEE82B9" Association="ИСПП6_Вар6_Агапов_АндреевModel.FK__РасчетЗар__КодСо__5AEE82B9">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="РасчетЗарплаты" EntitySet="РасчетЗарплаты" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Тендеры__Ответст__6EF57B66" Association="ИСПП6_Вар6_Агапов_АндреевModel.FK__Тендеры__Ответст__6EF57B66">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Тендеры" EntitySet="Тендеры" />
+          </AssociationSet>
+          <AssociationSet Name="FK__УчетРабоч__КодСо__5629CD9C" Association="ИСПП6_Вар6_Агапов_АндреевModel.FK__УчетРабоч__КодСо__5629CD9C">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="УчетРабочегоВремени" EntitySet="УчетРабочегоВремени" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Участники__КодТе__72C60C4A" Association="ИСПП6_Вар6_Агапов_АндреевModel.FK__Участники__КодТе__72C60C4A">
+            <End Role="Тендеры" EntitySet="Тендеры" />
+            <End Role="УчастникиТендера" EntitySet="УчастникиТендера" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Договоры">
+          <Key>
+            <PropertyRef Name="КодДоговора" />
+          </Key>
+          <Property Name="КодДоговора" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="НомерДоговора" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="КодТендера" Type="Int32" />
+          <Property Name="КодПоставщика" Type="Int32" Nullable="false" />
+          <Property Name="ДатаНачала" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ДатаОкончания" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ОбщаяСумма" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="Статус" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Поставщики" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Договоры__КодПос__797309D9" FromRole="Договоры" ToRole="Поставщики" />
+          <NavigationProperty Name="Тендеры" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Договоры__КодТен__787EE5A0" FromRole="Договоры" ToRole="Тендеры" />
+        </EntityType>
+        <EntityType Name="ЗадачиПроекта">
+          <Key>
+            <PropertyRef Name="КодЗадачи" />
+          </Key>
+          <Property Name="КодЗадачи" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="КодПроекта" Type="Int32" Nullable="false" />
+          <Property Name="НазваниеЗадачи" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Исполнитель" Type="Int32" Nullable="false" />
+          <Property Name="ДатаНачала" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="СрокВыполнения" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Статус" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Сотрудники" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__ЗадачиПро__Испол__628FA481" FromRole="ЗадачиПроекта" ToRole="Сотрудники" />
+          <NavigationProperty Name="Проекты" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__ЗадачиПро__КодПр__619B8048" FromRole="ЗадачиПроекта" ToRole="Проекты" />
+        </EntityType>
+        <EntityType Name="ЗатратыПроекта">
+          <Key>
+            <PropertyRef Name="КодЗатраты" />
+          </Key>
+          <Property Name="КодЗатраты" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="КодПроекта" Type="Int32" Nullable="false" />
+          <Property Name="Дата" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Описание" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Сумма" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Категория" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Проекты" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__ЗатратыПр__КодПр__68487DD7" FromRole="ЗатратыПроекта" ToRole="Проекты" />
+        </EntityType>
+        <EntityType Name="ИспользованиеНедвижимости">
+          <Key>
+            <PropertyRef Name="КодИспользования" />
+          </Key>
+          <Property Name="КодИспользования" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="КодОбъекта" Type="Int32" Nullable="false" />
+          <Property Name="КодПроекта" Type="Int32" />
+          <Property Name="ДатаНачала" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ДатаОкончания" Type="DateTime" Precision="0" />
+          <Property Name="Назначение" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ОбъектыНедвижимости" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Использов__КодОб__00200768" FromRole="ИспользованиеНедвижимости" ToRole="ОбъектыНедвижимости" />
+          <NavigationProperty Name="Проекты" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Использов__КодПр__01142BA1" FromRole="ИспользованиеНедвижимости" ToRole="Проекты" />
+        </EntityType>
+        <EntityType Name="ОбъектыНедвижимости">
+          <Key>
+            <PropertyRef Name="КодОбъекта" />
+          </Key>
+          <Property Name="КодОбъекта" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Наименование" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Адрес" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ТипНедвижимости" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Площадь" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Ответственный" Type="Int32" Nullable="false" />
+          <Property Name="Статус" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ИспользованиеНедвижимости" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Использов__КодОб__00200768" FromRole="ОбъектыНедвижимости" ToRole="ИспользованиеНедвижимости" />
+          <NavigationProperty Name="Сотрудники" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__ОбъектыНе__Ответ__7D439ABD" FromRole="ОбъектыНедвижимости" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="Поставщики">
+          <Key>
+            <PropertyRef Name="КодПоставщика" />
+          </Key>
+          <Property Name="КодПоставщика" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Наименование" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="КонтактноеЛицо" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Телефон" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Рейтинг" Type="Int32" />
+          <NavigationProperty Name="Договоры" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Договоры__КодПос__797309D9" FromRole="Поставщики" ToRole="Договоры" />
+          <NavigationProperty Name="УчастникиТендера" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Участники__КодПо__73BA3083" FromRole="Поставщики" ToRole="УчастникиТендера" />
+        </EntityType>
+        <EntityType Name="Проекты">
+          <Key>
+            <PropertyRef Name="КодПроекта" />
+          </Key>
+          <Property Name="КодПроекта" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="НазваниеПроекта" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Описание" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ДатаНачала" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ДатаЗавершения" Type="DateTime" Precision="0" />
+          <Property Name="Бюджет" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="РуководительПроекта" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ЗадачиПроекта" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__ЗадачиПро__КодПр__619B8048" FromRole="Проекты" ToRole="ЗадачиПроекта" />
+          <NavigationProperty Name="ЗатратыПроекта" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__ЗатратыПр__КодПр__68487DD7" FromRole="Проекты" ToRole="ЗатратыПроекта" />
+          <NavigationProperty Name="ИспользованиеНедвижимости" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Использов__КодПр__01142BA1" FromRole="Проекты" ToRole="ИспользованиеНедвижимости" />
+          <NavigationProperty Name="Сотрудники" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Проекты__Руковод__5DCAEF64" FromRole="Проекты" ToRole="Сотрудники" />
+          <NavigationProperty Name="РесурсыПроекта" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__РесурсыПр__КодПр__656C112C" FromRole="Проекты" ToRole="РесурсыПроекта" />
+        </EntityType>
+        <EntityType Name="РасчетЗарплаты">
+          <Key>
+            <PropertyRef Name="КодРасчета" />
+          </Key>
+          <Property Name="КодРасчета" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="КодСотрудника" Type="Int32" Nullable="false" />
+          <Property Name="Период" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Оклад" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Премия" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Удержания" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="ИтогоНачислено" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="Сотрудники" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__РасчетЗар__КодСо__5AEE82B9" FromRole="РасчетЗарплаты" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="РесурсыПроекта">
+          <Key>
+            <PropertyRef Name="КодРесурса" />
+          </Key>
+          <Property Name="КодРесурса" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="КодПроекта" Type="Int32" Nullable="false" />
+          <Property Name="НаименованиеРесурса" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ТипРесурса" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Количество" Type="Int32" Nullable="false" />
+          <Property Name="Стоимость" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="Проекты" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__РесурсыПр__КодПр__656C112C" FromRole="РесурсыПроекта" ToRole="Проекты" />
+        </EntityType>
+        <EntityType Name="Сотрудники">
+          <Key>
+            <PropertyRef Name="КодСотрудника" />
+          </Key>
+          <Property Name="КодСотрудника" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="КодПользователя" Type="Int32" Nullable="false" />
+          <Property Name="Фамилия" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Имя" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Должность" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ДатаПриема" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Оклад" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="ЗадачиПроекта" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__ЗадачиПро__Испол__628FA481" FromRole="Сотрудники" ToRole="ЗадачиПроекта" />
+          <NavigationProperty Name="ОбъектыНедвижимости" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__ОбъектыНе__Ответ__7D439ABD" FromRole="Сотрудники" ToRole="ОбъектыНедвижимости" />
+          <NavigationProperty Name="Пользователь" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Сотрудник__КодПо__534D60F1" FromRole="Сотрудники" ToRole="Пользователь" />
+          <NavigationProperty Name="Проекты" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Проекты__Руковод__5DCAEF64" FromRole="Сотрудники" ToRole="Проекты" />
+          <NavigationProperty Name="РасчетЗарплаты" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__РасчетЗар__КодСо__5AEE82B9" FromRole="Сотрудники" ToRole="РасчетЗарплаты" />
+          <NavigationProperty Name="Тендеры" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Тендеры__Ответст__6EF57B66" FromRole="Сотрудники" ToRole="Тендеры" />
+          <NavigationProperty Name="УчетРабочегоВремени" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__УчетРабоч__КодСо__5629CD9C" FromRole="Сотрудники" ToRole="УчетРабочегоВремени" />
+        </EntityType>
+        <EntityType Name="Тендеры">
+          <Key>
+            <PropertyRef Name="КодТендера" />
+          </Key>
+          <Property Name="КодТендера" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="НазваниеТендера" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Ответственный" Type="Int32" Nullable="false" />
+          <Property Name="ДатаНачала" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ДатаЗавершения" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Бюджет" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="Статус" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Договоры" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Договоры__КодТен__787EE5A0" FromRole="Тендеры" ToRole="Договоры" />
+          <NavigationProperty Name="Сотрудники" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Тендеры__Ответст__6EF57B66" FromRole="Тендеры" ToRole="Сотрудники" />
+          <NavigationProperty Name="УчастникиТендера" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Участники__КодТе__72C60C4A" FromRole="Тендеры" ToRole="УчастникиТендера" />
+        </EntityType>
+        <EntityType Name="УчастникиТендера">
+          <Key>
+            <PropertyRef Name="КодУчастия" />
+          </Key>
+          <Property Name="КодУчастия" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="КодТендера" Type="Int32" Nullable="false" />
+          <Property Name="КодПоставщика" Type="Int32" Nullable="false" />
+          <Property Name="ПредложеннаяСумма" Type="Decimal" Nullable="false" Precision="15" Scale="2" />
+          <Property Name="Статус" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Поставщики" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Участники__КодПо__73BA3083" FromRole="УчастникиТендера" ToRole="Поставщики" />
+          <NavigationProperty Name="Тендеры" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__Участники__КодТе__72C60C4A" FromRole="УчастникиТендера" ToRole="Тендеры" />
+        </EntityType>
+        <EntityType Name="УчетРабочегоВремени">
+          <Key>
+            <PropertyRef Name="КодУчета" />
+          </Key>
+          <Property Name="КодУчета" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="КодСотрудника" Type="Int32" Nullable="false" />
+          <Property Name="Дата" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ОтработанныеЧасы" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+          <NavigationProperty Name="Сотрудники" Relationship="ИСПП6_Вар6_Агапов_АндреевModel.FK__УчетРабоч__КодСо__5629CD9C" FromRole="УчетРабочегоВремени" ToRole="Сотрудники" />
+        </EntityType>
+        <Association Name="FK__Договоры__КодПос__797309D9">
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Поставщики" Role="Поставщики" Multiplicity="1" />
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Договоры" Role="Договоры" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поставщики">
+              <PropertyRef Name="КодПоставщика" />
+            </Principal>
+            <Dependent Role="Договоры">
+              <PropertyRef Name="КодПоставщика" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Договоры__КодТен__787EE5A0">
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Тендеры" Role="Тендеры" Multiplicity="0..1" />
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Договоры" Role="Договоры" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тендеры">
+              <PropertyRef Name="КодТендера" />
+            </Principal>
+            <Dependent Role="Договоры">
+              <PropertyRef Name="КодТендера" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ЗадачиПро__Испол__628FA481">
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Сотрудники" Role="Сотрудники" Multiplicity="1" />
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.ЗадачиПроекта" Role="ЗадачиПроекта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="ЗадачиПроекта">
+              <PropertyRef Name="Исполнитель" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ЗадачиПро__КодПр__619B8048">
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Проекты" Role="Проекты" Multiplicity="1" />
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.ЗадачиПроекта" Role="ЗадачиПроекта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Проекты">
+              <PropertyRef Name="КодПроекта" />
+            </Principal>
+            <Dependent Role="ЗадачиПроекта">
+              <PropertyRef Name="КодПроекта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ЗатратыПр__КодПр__68487DD7">
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Проекты" Role="Проекты" Multiplicity="1" />
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.ЗатратыПроекта" Role="ЗатратыПроекта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Проекты">
+              <PropertyRef Name="КодПроекта" />
+            </Principal>
+            <Dependent Role="ЗатратыПроекта">
+              <PropertyRef Name="КодПроекта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Использов__КодОб__00200768">
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.ОбъектыНедвижимости" Role="ОбъектыНедвижимости" Multiplicity="1" />
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.ИспользованиеНедвижимости" Role="ИспользованиеНедвижимости" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ОбъектыНедвижимости">
+              <PropertyRef Name="КодОбъекта" />
+            </Principal>
+            <Dependent Role="ИспользованиеНедвижимости">
+              <PropertyRef Name="КодОбъекта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Использов__КодПр__01142BA1">
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Проекты" Role="Проекты" Multiplicity="0..1" />
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.ИспользованиеНедвижимости" Role="ИспользованиеНедвижимости" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Проекты">
+              <PropertyRef Name="КодПроекта" />
+            </Principal>
+            <Dependent Role="ИспользованиеНедвижимости">
+              <PropertyRef Name="КодПроекта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ОбъектыНе__Ответ__7D439ABD">
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Сотрудники" Role="Сотрудники" Multiplicity="1" />
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.ОбъектыНедвижимости" Role="ОбъектыНедвижимости" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="ОбъектыНедвижимости">
+              <PropertyRef Name="Ответственный" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Сотрудник__КодПо__534D60F1">
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Пользователь" Role="Пользователь" Multiplicity="1" />
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Сотрудники" Role="Сотрудники" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователь">
+              <PropertyRef Name="КодПользователя" />
+            </Principal>
+            <Dependent Role="Сотрудники">
+              <PropertyRef Name="КодПользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Участники__КодПо__73BA3083">
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Поставщики" Role="Поставщики" Multiplicity="1" />
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.УчастникиТендера" Role="УчастникиТендера" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поставщики">
+              <PropertyRef Name="КодПоставщика" />
+            </Principal>
+            <Dependent Role="УчастникиТендера">
+              <PropertyRef Name="КодПоставщика" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Проекты__Руковод__5DCAEF64">
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Сотрудники" Role="Сотрудники" Multiplicity="1" />
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Проекты" Role="Проекты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="Проекты">
+              <PropertyRef Name="РуководительПроекта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__РесурсыПр__КодПр__656C112C">
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Проекты" Role="Проекты" Multiplicity="1" />
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.РесурсыПроекта" Role="РесурсыПроекта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Проекты">
+              <PropertyRef Name="КодПроекта" />
+            </Principal>
+            <Dependent Role="РесурсыПроекта">
+              <PropertyRef Name="КодПроекта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__РасчетЗар__КодСо__5AEE82B9">
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Сотрудники" Role="Сотрудники" Multiplicity="1" />
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.РасчетЗарплаты" Role="РасчетЗарплаты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="РасчетЗарплаты">
+              <PropertyRef Name="КодСотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Тендеры__Ответст__6EF57B66">
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Сотрудники" Role="Сотрудники" Multiplicity="1" />
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Тендеры" Role="Тендеры" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="Тендеры">
+              <PropertyRef Name="Ответственный" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__УчетРабоч__КодСо__5629CD9C">
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Сотрудники" Role="Сотрудники" Multiplicity="1" />
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.УчетРабочегоВремени" Role="УчетРабочегоВремени" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="УчетРабочегоВремени">
+              <PropertyRef Name="КодСотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Участники__КодТе__72C60C4A">
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.Тендеры" Role="Тендеры" Multiplicity="1" />
+          <End Type="ИСПП6_Вар6_Агапов_АндреевModel.УчастникиТендера" Role="УчастникиТендера" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тендеры">
+              <PropertyRef Name="КодТендера" />
+            </Principal>
+            <Dependent Role="УчастникиТендера">
+              <PropertyRef Name="КодТендера" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -120,7 +985,168 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Договоры">
+            <EntityTypeMapping TypeName="ИСПП6_Вар6_Агапов_АндреевModel.Договоры">
+              <MappingFragment StoreEntitySet="Договоры">
+                <ScalarProperty Name="Статус" ColumnName="Статус" />
+                <ScalarProperty Name="ОбщаяСумма" ColumnName="ОбщаяСумма" />
+                <ScalarProperty Name="ДатаОкончания" ColumnName="ДатаОкончания" />
+                <ScalarProperty Name="ДатаНачала" ColumnName="ДатаНачала" />
+                <ScalarProperty Name="КодПоставщика" ColumnName="КодПоставщика" />
+                <ScalarProperty Name="КодТендера" ColumnName="КодТендера" />
+                <ScalarProperty Name="НомерДоговора" ColumnName="НомерДоговора" />
+                <ScalarProperty Name="КодДоговора" ColumnName="КодДоговора" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗадачиПроекта">
+            <EntityTypeMapping TypeName="ИСПП6_Вар6_Агапов_АндреевModel.ЗадачиПроекта">
+              <MappingFragment StoreEntitySet="ЗадачиПроекта">
+                <ScalarProperty Name="Статус" ColumnName="Статус" />
+                <ScalarProperty Name="СрокВыполнения" ColumnName="СрокВыполнения" />
+                <ScalarProperty Name="ДатаНачала" ColumnName="ДатаНачала" />
+                <ScalarProperty Name="Исполнитель" ColumnName="Исполнитель" />
+                <ScalarProperty Name="НазваниеЗадачи" ColumnName="НазваниеЗадачи" />
+                <ScalarProperty Name="КодПроекта" ColumnName="КодПроекта" />
+                <ScalarProperty Name="КодЗадачи" ColumnName="КодЗадачи" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЗатратыПроекта">
+            <EntityTypeMapping TypeName="ИСПП6_Вар6_Агапов_АндреевModel.ЗатратыПроекта">
+              <MappingFragment StoreEntitySet="ЗатратыПроекта">
+                <ScalarProperty Name="Категория" ColumnName="Категория" />
+                <ScalarProperty Name="Сумма" ColumnName="Сумма" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="КодПроекта" ColumnName="КодПроекта" />
+                <ScalarProperty Name="КодЗатраты" ColumnName="КодЗатраты" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ИспользованиеНедвижимости">
+            <EntityTypeMapping TypeName="ИСПП6_Вар6_Агапов_АндреевModel.ИспользованиеНедвижимости">
+              <MappingFragment StoreEntitySet="ИспользованиеНедвижимости">
+                <ScalarProperty Name="Назначение" ColumnName="Назначение" />
+                <ScalarProperty Name="ДатаОкончания" ColumnName="ДатаОкончания" />
+                <ScalarProperty Name="ДатаНачала" ColumnName="ДатаНачала" />
+                <ScalarProperty Name="КодПроекта" ColumnName="КодПроекта" />
+                <ScalarProperty Name="КодОбъекта" ColumnName="КодОбъекта" />
+                <ScalarProperty Name="КодИспользования" ColumnName="КодИспользования" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ОбъектыНедвижимости">
+            <EntityTypeMapping TypeName="ИСПП6_Вар6_Агапов_АндреевModel.ОбъектыНедвижимости">
+              <MappingFragment StoreEntitySet="ОбъектыНедвижимости">
+                <ScalarProperty Name="Статус" ColumnName="Статус" />
+                <ScalarProperty Name="Ответственный" ColumnName="Ответственный" />
+                <ScalarProperty Name="Площадь" ColumnName="Площадь" />
+                <ScalarProperty Name="ТипНедвижимости" ColumnName="ТипНедвижимости" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="КодОбъекта" ColumnName="КодОбъекта" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Поставщики">
+            <EntityTypeMapping TypeName="ИСПП6_Вар6_Агапов_АндреевModel.Поставщики">
+              <MappingFragment StoreEntitySet="Поставщики">
+                <ScalarProperty Name="Рейтинг" ColumnName="Рейтинг" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="КонтактноеЛицо" ColumnName="КонтактноеЛицо" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="КодПоставщика" ColumnName="КодПоставщика" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Проекты">
+            <EntityTypeMapping TypeName="ИСПП6_Вар6_Агапов_АндреевModel.Проекты">
+              <MappingFragment StoreEntitySet="Проекты">
+                <ScalarProperty Name="РуководительПроекта" ColumnName="РуководительПроекта" />
+                <ScalarProperty Name="Бюджет" ColumnName="Бюджет" />
+                <ScalarProperty Name="ДатаЗавершения" ColumnName="ДатаЗавершения" />
+                <ScalarProperty Name="ДатаНачала" ColumnName="ДатаНачала" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="НазваниеПроекта" ColumnName="НазваниеПроекта" />
+                <ScalarProperty Name="КодПроекта" ColumnName="КодПроекта" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="РасчетЗарплаты">
+            <EntityTypeMapping TypeName="ИСПП6_Вар6_Агапов_АндреевModel.РасчетЗарплаты">
+              <MappingFragment StoreEntitySet="РасчетЗарплаты">
+                <ScalarProperty Name="ИтогоНачислено" ColumnName="ИтогоНачислено" />
+                <ScalarProperty Name="Удержания" ColumnName="Удержания" />
+                <ScalarProperty Name="Премия" ColumnName="Премия" />
+                <ScalarProperty Name="Оклад" ColumnName="Оклад" />
+                <ScalarProperty Name="Период" ColumnName="Период" />
+                <ScalarProperty Name="КодСотрудника" ColumnName="КодСотрудника" />
+                <ScalarProperty Name="КодРасчета" ColumnName="КодРасчета" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="РесурсыПроекта">
+            <EntityTypeMapping TypeName="ИСПП6_Вар6_Агапов_АндреевModel.РесурсыПроекта">
+              <MappingFragment StoreEntitySet="РесурсыПроекта">
+                <ScalarProperty Name="Стоимость" ColumnName="Стоимость" />
+                <ScalarProperty Name="Количество" ColumnName="Количество" />
+                <ScalarProperty Name="ТипРесурса" ColumnName="ТипРесурса" />
+                <ScalarProperty Name="НаименованиеРесурса" ColumnName="НаименованиеРесурса" />
+                <ScalarProperty Name="КодПроекта" ColumnName="КодПроекта" />
+                <ScalarProperty Name="КодРесурса" ColumnName="КодРесурса" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сотрудники">
+            <EntityTypeMapping TypeName="ИСПП6_Вар6_Агапов_АндреевModel.Сотрудники">
+              <MappingFragment StoreEntitySet="Сотрудники">
+                <ScalarProperty Name="Оклад" ColumnName="Оклад" />
+                <ScalarProperty Name="ДатаПриема" ColumnName="ДатаПриема" />
+                <ScalarProperty Name="Должность" ColumnName="Должность" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="КодПользователя" ColumnName="КодПользователя" />
+                <ScalarProperty Name="КодСотрудника" ColumnName="КодСотрудника" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Тендеры">
+            <EntityTypeMapping TypeName="ИСПП6_Вар6_Агапов_АндреевModel.Тендеры">
+              <MappingFragment StoreEntitySet="Тендеры">
+                <ScalarProperty Name="Статус" ColumnName="Статус" />
+                <ScalarProperty Name="Бюджет" ColumnName="Бюджет" />
+                <ScalarProperty Name="ДатаЗавершения" ColumnName="ДатаЗавершения" />
+                <ScalarProperty Name="ДатаНачала" ColumnName="ДатаНачала" />
+                <ScalarProperty Name="Ответственный" ColumnName="Ответственный" />
+                <ScalarProperty Name="НазваниеТендера" ColumnName="НазваниеТендера" />
+                <ScalarProperty Name="КодТендера" ColumnName="КодТендера" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="УчастникиТендера">
+            <EntityTypeMapping TypeName="ИСПП6_Вар6_Агапов_АндреевModel.УчастникиТендера">
+              <MappingFragment StoreEntitySet="УчастникиТендера">
+                <ScalarProperty Name="Статус" ColumnName="Статус" />
+                <ScalarProperty Name="ПредложеннаяСумма" ColumnName="ПредложеннаяСумма" />
+                <ScalarProperty Name="КодПоставщика" ColumnName="КодПоставщика" />
+                <ScalarProperty Name="КодТендера" ColumnName="КодТендера" />
+                <ScalarProperty Name="КодУчастия" ColumnName="КодУчастия" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="УчетРабочегоВремени">
+            <EntityTypeMapping TypeName="ИСПП6_Вар6_Агапов_АндреевModel.УчетРабочегоВремени">
+              <MappingFragment StoreEntitySet="УчетРабочегоВремени">
+                <ScalarProperty Name="ОтработанныеЧасы" ColumnName="ОтработанныеЧасы" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="КодСотрудника" ColumnName="КодСотрудника" />
+                <ScalarProperty Name="КодУчета" ColumnName="КодУчета" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

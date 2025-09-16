@@ -12,25 +12,24 @@ namespace Project
     using System;
     using System.Collections.Generic;
     
-    public partial class Пользователь
+    public partial class ОбъектыНедвижимости
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Пользователь()
+        public ОбъектыНедвижимости()
         {
-            this.Сотрудники = new HashSet<Сотрудники>();
+            this.ИспользованиеНедвижимости = new HashSet<ИспользованиеНедвижимости>();
         }
     
-        public int КодПользователя { get; set; }
-        public string Фамилия { get; set; }
-        public string Имя { get; set; }
-        public string ЭлектроннаяПочта { get; set; }
-        public string Пароль { get; set; }
-        public string КодовоеСлово { get; set; }
-        public string ОтветНаСекретныйВопрос { get; set; }
-        public int КодСекретныйВопрос { get; set; }
+        public int КодОбъекта { get; set; }
+        public string Наименование { get; set; }
+        public string Адрес { get; set; }
+        public string ТипНедвижимости { get; set; }
+        public decimal Площадь { get; set; }
+        public int Ответственный { get; set; }
+        public string Статус { get; set; }
     
-        public virtual СекретныйВопрос СекретныйВопрос { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Сотрудники> Сотрудники { get; set; }
+        public virtual ICollection<ИспользованиеНедвижимости> ИспользованиеНедвижимости { get; set; }
+        public virtual Сотрудники Сотрудники { get; set; }
     }
 }

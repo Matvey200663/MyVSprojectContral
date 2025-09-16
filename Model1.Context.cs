@@ -27,5 +27,18 @@ namespace Project
     
         public virtual DbSet<Пользователь> Пользователь { get; set; }
         public virtual DbSet<СекретныйВопрос> СекретныйВопрос { get; set; }
+        public virtual DbSet<Договоры> Договоры { get; set; }
+        public virtual DbSet<ЗадачиПроекта> ЗадачиПроекта { get; set; }
+        public virtual DbSet<ЗатратыПроекта> ЗатратыПроекта { get; set; }
+        public virtual DbSet<ИспользованиеНедвижимости> ИспользованиеНедвижимости { get; set; }
+        public virtual DbSet<ОбъектыНедвижимости> ОбъектыНедвижимости { get; set; }
+        public virtual DbSet<Поставщики> Поставщики { get; set; }
+        public virtual DbSet<Проекты> Проекты { get; set; }
+        public virtual DbSet<РасчетЗарплаты> РасчетЗарплаты { get; set; }
+        public virtual DbSet<РесурсыПроекта> РесурсыПроекта { get; set; }
+        public virtual DbSet<Сотрудники> Сотрудники { get; set; }
+        public virtual DbSet<Тендеры> Тендеры { get; set; }
+        public virtual DbSet<УчастникиТендера> УчастникиТендера { get; set; }
+        public virtual DbSet<УчетРабочегоВремени> УчетРабочегоВремени { get; set; }
     }
 }
