@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ИСПП6_Вар6_Агапов_АндреевModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Пользователь">
+          <Key>
+            <PropertyRef Name="КодПользователя" />
+          </Key>
+          <Property Name="КодПользователя" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ЭлектроннаяПочта" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Пароль" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="КодовоеСлово" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ОтветНаСекретныйВопрос" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="КодСекретныйВопрос" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="СекретныйВопрос">
+          <Key>
+            <PropertyRef Name="КодСекретныйВопрос" />
+          </Key>
+          <Property Name="КодСекретныйВопрос" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="СекретныйВопрос" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Пользователь_СекретныйВопрос">
+          <End Role="СекретныйВопрос" Type="Self.СекретныйВопрос" Multiplicity="1" />
+          <End Role="Пользователь" Type="Self.Пользователь" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="СекретныйВопрос">
+              <PropertyRef Name="КодСекретныйВопрос" />
+            </Principal>
+            <Dependent Role="Пользователь">
+              <PropertyRef Name="КодСекретныйВопрос" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ИСПП6_Вар6_Агапов_АндреевModelContainer">
+          <EntitySet Name="Пользователь" EntityType="Self.Пользователь" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="СекретныйВопрос" EntityType="Self.СекретныйВопрос" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Пользователь_СекретныйВопрос" Association="Self.FK_Пользователь_СекретныйВопрос">
+            <End Role="СекретныйВопрос" EntitySet="СекретныйВопрос" />
+            <End Role="Пользователь" EntitySet="Пользователь" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ИСПП6_Вар6_Агапов_АндреевModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Пользователь">
+          <Key>
+            <PropertyRef Name="КодПользователя" />
+          </Key>
+          <Property Name="КодПользователя" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ЭлектроннаяПочта" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Пароль" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="КодовоеСлово" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ОтветНаСекретныйВопрос" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="КодСекретныйВопрос" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="СекретныйВопрос" Relationship="Self.FK_Пользователь_СекретныйВопрос" FromRole="Пользователь" ToRole="СекретныйВопрос" />
+        </EntityType>
+        <EntityType Name="СекретныйВопрос">
+          <Key>
+            <PropertyRef Name="КодСекретныйВопрос" />
+          </Key>
+          <Property Name="КодСекретныйВопрос" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="СекретныйВопрос1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Пользователь" Relationship="Self.FK_Пользователь_СекретныйВопрос" FromRole="СекретныйВопрос" ToRole="Пользователь" />
+        </EntityType>
+        <Association Name="FK_Пользователь_СекретныйВопрос">
+          <End Role="СекретныйВопрос" Type="Self.СекретныйВопрос" Multiplicity="1" />
+          <End Role="Пользователь" Type="Self.Пользователь" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="СекретныйВопрос">
+              <PropertyRef Name="КодСекретныйВопрос" />
+            </Principal>
+            <Dependent Role="Пользователь">
+              <PropertyRef Name="КодСекретныйВопрос" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ИСПП6_Вар6_Агапов_АндреевEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Пользователь" EntityType="Self.Пользователь" />
+          <EntitySet Name="СекретныйВопрос" EntityType="Self.СекретныйВопрос" />
+          <AssociationSet Name="FK_Пользователь_СекретныйВопрос" Association="Self.FK_Пользователь_СекретныйВопрос">
+            <End Role="СекретныйВопрос" EntitySet="СекретныйВопрос" />
+            <End Role="Пользователь" EntitySet="Пользователь" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ИСПП6_Вар6_Агапов_АндреевModelContainer" CdmEntityContainer="ИСПП6_Вар6_Агапов_АндреевEntities1">
+          <EntitySetMapping Name="Пользователь">
+            <EntityTypeMapping TypeName="ИСПП6_Вар6_Агапов_АндреевModel.Пользователь">
+              <MappingFragment StoreEntitySet="Пользователь">
+                <ScalarProperty Name="КодПользователя" ColumnName="КодПользователя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="ЭлектроннаяПочта" ColumnName="ЭлектроннаяПочта" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="КодовоеСлово" ColumnName="КодовоеСлово" />
+                <ScalarProperty Name="ОтветНаСекретныйВопрос" ColumnName="ОтветНаСекретныйВопрос" />
+                <ScalarProperty Name="КодСекретныйВопрос" ColumnName="КодСекретныйВопрос" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="СекретныйВопрос">
+            <EntityTypeMapping TypeName="ИСПП6_Вар6_Агапов_АндреевModel.СекретныйВопрос">
+              <MappingFragment StoreEntitySet="СекретныйВопрос">
+                <ScalarProperty Name="КодСекретныйВопрос" ColumnName="КодСекретныйВопрос" />
+                <ScalarProperty Name="СекретныйВопрос1" ColumnName="СекретныйВопрос" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
