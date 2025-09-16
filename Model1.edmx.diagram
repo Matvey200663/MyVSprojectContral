@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f21ccacc46dc43c0af233411e085fd2d" Name="Diagram1" ZoomLevel="26">
+      <Diagram DiagramId="f21ccacc46dc43c0af233411e085fd2d" Name="Diagram1" ZoomLevel="65">
         <EntityTypeShape EntityType="ИСПП6_Вар6_Агапов_АндреевModel.Пользователь" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="ИСПП6_Вар6_Агапов_АндреевModel.СекретныйВопрос" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <AssociationConnector Association="ИСПП6_Вар6_Агапов_АндреевModel.FK_Пользователь_СекретныйВопрос" ManuallyRouted="false" />
